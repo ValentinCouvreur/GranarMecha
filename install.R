@@ -1,8 +1,0 @@
-install.packages("tidyverse")
-install.packages(deldir)
-install.packages(alphahull)
-install.packages(retistruct)
-install.packages("devtools")
-install.packages("viridis")
-install.packages("xml2")
-install.packages("readr")
