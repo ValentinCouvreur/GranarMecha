@@ -1,7 +1,7 @@
 
-source("./aer_in_geom_xml.R")
-source("./anatin_fun.R")
-source("./create_anatomy.R")
-source("./plot_anatomy.R")
-source("./read_param_xml.R")
-source("./write_anatomu_xml_pv.R")
+source("./GRANAR/R/aer_in_geom_xml.R")
+source("./GRANAR/R/anatin_fun.R")
+source("./GRANAR/R/create_anatomy.R")
+source("./GRANAR/R/plot_anatomy.R")
+source("./GRANAR/R/read_param_xml.R")
+source("./GRANAR/R/write_anatomu_xml_pv.R")
