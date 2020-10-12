@@ -1,6 +1,1 @@
 install.packages("tidyverse")
-install.packages("deldir")
-install.packages("devtools")
-install.packages("viridis")
-install.packages("xml2")
-install.packages("sp")
