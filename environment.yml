@@ -4,6 +4,8 @@ channels:
 dependencies:
   - numpy
   - scipy
-  - networkx=1.9.1
   - matplotlib
   - lxml
+  - pip
+  - pip:
+    - networkx==1.9.1
