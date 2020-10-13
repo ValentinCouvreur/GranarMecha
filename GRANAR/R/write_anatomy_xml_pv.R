@@ -57,7 +57,7 @@ write_anatomy_xml <- function(sim = NULL, path = NULL){
   xml <- paste0(xml, '\t<walls count="',length(unique(nodes_data$id_wall)),'">\n')
 
   walls <- sim$walls%>%
-    select((starts_with("x") | starts_with("y")) & ends_with(as.character(c(0:9))))
+    select(starts_with("x"), starts_with("y"))
   col_nam <- colnames(walls)
 
   substr1(col_nam[nchar(col_nam) == 2], 1.5) <- "0"
