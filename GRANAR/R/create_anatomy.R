@@ -205,8 +205,9 @@ create_anatomy_3 <- function(path = NULL,  # path to xml file
 
   if(paraview){
     walls <- pv_ready(rs1)
-    wall_length <- walls%>%select((starts_with("x") | starts_with("y")) & ends_with(as.character(c(0:9))))%>%
+    wall_length <- walls%>%select(-x, -y, starts_with("x"), starts_with("y"))%>% # ends_with(as.character(c(0:9)))
       colnames()
+    print(wall_length)
     wally <- walls[!duplicated(walls[,wall_length]),] %>%
       dplyr::select(wall_length)
     wally$id_wall <- c(1:nrow(wally))
@@ -264,31 +265,3 @@ create_anatomy_3 <- function(path = NULL,  # path to xml file
               id_aerenchyma = id_aerenchyma))
 
 }
-
-# temp%>%
-#   ggplot()+
-#   geom_polygon(aes(x,y, group = id_cell, fill = type ), colour = "white")+
-#   coord_fixed()+
-#   theme_classic()
-#
-# rs1%>%
-#   ggplot()+
-#   geom_polygon(aes(x,y, group = id_cell, fill = type ), colour = "white")+
-#   coord_fixed()+
-#   theme_classic()
-#
-# sim$walls_nodes%>%
-#   filter(id_cell == 1039)%>%
-#   ggplot()+
-#   geom_segment(aes(x = x1, xend = x2,y = y1, yend = y2))+
-#   geom_segment(aes(x = x2, xend = x3,y = y2, yend = y3))+
-#   geom_segment(aes(x = x3, xend = x4,y = y3, yend = y4))+
-#   coord_fixed()+
-#   theme_classic()
-#
-# sim$nodes%>%
-#   filter(id_cell == 1039)%>%
-#   ggplot()+
-#   geom_polygon(aes(x,y, group = id_cell, fill = type ), colour = "white")+
-#   coord_fixed()+
-#   theme_classic()
