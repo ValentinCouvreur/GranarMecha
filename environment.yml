@@ -1,0 +1,9 @@
+name: example-environment
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - scipy
+  - networkx=1.9.1
+  - matplotlib
+  - lxml
