@@ -1,6 +1,6 @@
 
 
-create_anatomy_3 <- function(path = NULL,  # path to xml file
+create_anatomy <- function(path = NULL,  # path to xml file
                              parameters = NULL,
                              verbatim = F,
                              maturity_x = F,
@@ -53,7 +53,7 @@ create_anatomy_3 <- function(path = NULL,  # path to xml file
 
   #set all cell center
   all_cells <- create_cells(all_layers, random_fact)
-  summary_cells <- ddply(all_cells, .(type), summarise, n_cells = length(angle))
+  summary_cells <- plyr::ddply(all_cells, .(type), summarise, n_cells = length(angle))
   all_cells$type[substr(all_cells$type, 1,6) == "cortex"] <- "cortex"
   all_cells$id_group <- 0
 
@@ -205,7 +205,8 @@ create_anatomy_3 <- function(path = NULL,  # path to xml file
 
   if(paraview){
     walls <- pv_ready(rs1)
-    wall_length <- walls%>%select(-x, -y, starts_with("x"), starts_with("y"))%>% # ends_with(as.character(c(0:9)))
+    wall_length <- walls%>%select(-x, -y, -xx, -yy)%>% # ends_with(as.character(c(0:9)))
+      select(starts_with("x"), starts_with("y"))%>%
       colnames()
     print(wall_length)
     wally <- walls[!duplicated(walls[,wall_length]),] %>%
@@ -228,32 +229,8 @@ create_anatomy_3 <- function(path = NULL,  # path to xml file
       arrange(sorting)
   }
 
-  t9 <- proc.time()
   id_aerenchyma <- unique(nodes$id_cell[nodes$type %in% c("aerenchyma", "inter_cellular_space")])
   id_aerenchyma <- id_aerenchyma-1
-
-  if(verbatim){
-    message("---------------")
-    message("Time analysis: ")
-    message("-- Loading")
-    print(t2-t1)
-    message("-- Cell layers")
-    print(t3-t2)
-    message("-- Cells")
-    print(t4-t3)
-    message("-- Xylem")
-    print(t5-t4)
-    message("-- Geometry")
-    print(t6-t5)
-    message("-- Aerenchyma")
-    print(t7-t6)
-    message("-- Merging")
-    print(t8-t7)
-    message("-- Tidying")
-    print(t9-t8)
-    message("------ All")
-    print(t9-t1)
-  }
 
   print(Sys.time()-t_1)
 
