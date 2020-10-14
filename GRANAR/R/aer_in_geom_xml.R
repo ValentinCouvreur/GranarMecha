@@ -1,6 +1,6 @@
 
 
-aer_in_geom_xml <- function(sim, path = "~/Thesis/2020-02 GRANAR_3D/MECHA_GRANAR/Projects/GRANAR/in/Maize_Geometry.xml"){
+aer_in_geom_xml <- function(sim, path = "./MECHA/Projects/GRANAR/in/Maize_Geometry.xml"){
   
   require(xml2)
   if (is.null(path)) {
