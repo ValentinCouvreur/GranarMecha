@@ -10,7 +10,9 @@
 	<stele cell_diameter="0.009" n_layers="1" layer_diameter = "0.282" order="1"/>
 	<pericycle cell_diameter="0.007" n_layers="1"  order="2"/>
 	<endodermis cell_diameter="0.009" n_layers="1"  order="3"/>
-	<cortex cell_diameter="0.014" n_layers="10"  order="4"/>
+	<cortex_inner cell_diameter="0.015" n_layers="1"  order="4"/>
+	<cortex cell_diameter="0.03" n_layers="3"  order="4"/>
+	<cortex_outer cell_diameter="0.02" n_layers="3"  order="5"/>
 	<exodermis cell_diameter="0.0157" n_layers="1" order="5"/>	
 	<epidermis cell_diameter="0.011" n_layers="1" order="6"/>
 
@@ -22,6 +24,5 @@
 	<!-- Other cell types -->
 	<!--aerenchyma proportion="0" n_files="10"/-->
 	<aerenchyma proportion="0.0" n_files="10"/>
-	<inter_cellular_space ratio = "0.1" size = "0.003"/>
 
 </granar>

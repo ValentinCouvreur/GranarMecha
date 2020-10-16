@@ -220,14 +220,6 @@ rondy_cortex <- function(params, all_cells, center){
     mutate(ID = paste0(x,y))%>%
     filter(!duplicated(ID))
 
-  rc1%>%
-    ggplot()+
-    geom_polygon(aes(x,y, group = id_cell, fill = type), colour = "white")+
-    #geom_point(aes(x,y,colour = factor(id_cell)), size = 2, alpha = 0.3, data = all_cortex)+
-    # geom_point(aes(x,y, colour = factor(id_group)), data = cor_frontier)+
-    coord_fixed()+
-    guides(colour = F)
-
   all_inter <- data.frame(angle = ifelse(rcin$y-center >= 0, acos((rcin$x - center)/rcin$euc),
                                          2*pi-acos((rcin$x - center)/rcin$euc)),
                           radius = rcin$euc,
