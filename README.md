@@ -15,7 +15,9 @@ then create an environment for python and add those dependencies:
   - matplotlib
   - lxml
   - pip
+  
   and use pip to install
+  
   - networkx==1.9.1
   
 with anaconda:
