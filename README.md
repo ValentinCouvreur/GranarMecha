@@ -32,8 +32,9 @@ conda install pip
 pip install networkx==1.9.1
 ```
 
-Those past step should allow you to run [MECHA](https://mecharoot.github.io/)
-The next one will allow you to run [GRANAR](https://granar.github.io/)
+Those past step should allow you to run [MECHA](https://mecharoot.github.io/).
+
+The next ones will allow you to run [GRANAR](https://granar.github.io/) and call MECHA in the R script.
 
 Using R in [RStudio](https://rstudio.com/products/rstudio/) you can run this code:
 
