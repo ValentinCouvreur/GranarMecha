@@ -32,9 +32,10 @@ conda install pip
 pip install networkx==1.9.1
 ```
 
-Those step should allow you to run [MECHA](https://mecharoot.github.io/)
+Those past step should allow you to run [MECHA](https://mecharoot.github.io/)
+The next one will allow you to run [GRANAR](https://granar.github.io/)
 
-Using R in [RStudio](https://rstudio.com/products/rstudio/) should allow you to run this code
+Using R in [RStudio](https://rstudio.com/products/rstudio/) you can run this code:
 
 make sure you have installed those library:
 - tidyverse
