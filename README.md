@@ -96,6 +96,16 @@ aer_in_geom_xml(sim, "MECHA/Projects/granar/in/Maize_Geometry.xml")
 # here is the example if your using anaconda
 system(" ........../AppData/Local/Continuum/anaconda3/envs/MECHA/python.exe MECHA/MECHAv4_light.py")
 
+# Upload MECHA output 
+Flux1 <- ApoSymp("MECHA/Projects/granar/out/Root/Project_Test/baseline/Macro_prop_1,0.txt")
+Flux2 <- ApoSymp("MECHA/Projects/granar/out/Root/Project_Test/baseline/Macro_prop_2,1.txt")
+Flux3 <- ApoSymp("MECHA/Projects/granar/out/Root/Project_Test/baseline/Macro_prop_4,2.txt")
+
+# Plot Apoplastic and Symplastic fluxes
+plot_water_flux(Flux1)
+plot_water_flux(Flux2)
+plot_water_flux(Flux3)
+
 ```
 
 
