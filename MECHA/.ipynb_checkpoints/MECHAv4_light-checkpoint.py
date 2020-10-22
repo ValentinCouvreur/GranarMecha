@@ -4,17 +4,23 @@
 dir='./MECHA/'
 
 #Project
-Project='Projects/granar/'#BBSRC/'#'Projects/
+Project=''
 
 #Inputs
-Gen='Maize_General.xml'#'Arabido1_General.xml' #'MilletLR3_General.xml' #
-Geom='Maize_Geometry_aer.xml'#'Arabido4_Geometry_BBSRC.xml' #'Maize2_Geometry.xml' #''MilletLR3_Geometry.xml' #'Wheat1_Nodal_Geometry_aerenchyma.xml' #'Maize1_Geometry.xml' #
-Hydr='Maize_Hydraulics.xml' #'Arabido1_Hydraulics_ERC.xml' #'MilletLR3_Hydraulics.xml' #'Test_Hydraulics.xml' #
-BC='Maize_BC_kr.xml' #'Arabido4_BC_BBSRC2.xml' #'Arabido1_BC_Emily.xml' #'Arabido3_BC_BBSRC.xml' #'Maize_BC_SoluteAna_krOsmo.xml'#'Maize_BC_OSxyl_hetero.xml' #'Arabido1_BC_Emily.xml' #'BC_Test.xml' #'Maize_BC_Plant_phys.xml'
+Gen='Maize_General.xml'
+Geom='Root_example.xml'
+Hydr='Maize_Hydraulics.xml' 
+BC='Maize_BC_kr.xml' 
 Horm='Maize_Hormones_Carriers.xml'
 
 #Libraries
-import numpy as np 
+import numpy as np #NumPy is the fundamental package for scientific computing with Python.
+                   #It contains among other things:
+                   #- a powerful N-dimensional array object
+                   #- sophisticated (broadcasting) functions
+                   #- tools for integrating C/C++ and Fortran code
+                   #- useful linear algebra, Fourier transform, and random number capabilities
+#mp.mp.dps = 20 #Floating point precision
 from numpy import genfromtxt #Load data from a text file, with missing values handled as specified.
 from numpy.random import *  # for random sampling
 import scipy.linalg as slin #Linear algebra functions
@@ -27,7 +33,8 @@ import sys, os # On importe le module os qui dispose de variables
                # et de fonctions utiles pour dialoguer avec votre 
                # système d'exploitation
 
-print('Importing geometrical data')
+#Import General data
+#print('Importing geometrical data')
 OS=etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('OS')[0].get("value")
 Output_path=etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Output')[0].get("path")
 Paraview=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("value"))
@@ -44,7 +51,7 @@ thickness_disp=float(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('t
 thicknessJunction_disp=float(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('thicknessJunction_disp')[0].get("value"))
 radiusPlasmodesm_disp=float(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('radiusPlasmodesm_disp')[0].get("value"))
 
-print('Import Geometrical data')
+#Import Geometrical data
 Plant=etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('Plant')[0].get("value")
 path=etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('path')[0].get("value")
 im_scale=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('im_scale')[0].get("value"))
@@ -135,7 +142,7 @@ if not os.path.exists(newpath):
 G = nx.Graph() #Full network
 
 #Creates wall & junction nodes
-print('Creating network nodes')
+#print('Creating network nodes')
 Nwalls=len(points)
 Ncells=len(Cells_loop)
 NwallsJun=Nwalls #Will increment at each new junction node
@@ -313,7 +320,7 @@ Nxyl=len(listxyl)
 position=nx.get_node_attributes(G,'position') #Updates nodes XY positions (micrometers)
 
 #add Edges
-print('Creating network connections')
+#print('Creating network connections')
 lat_dists=zeros((Nwalls,1))
 Nmb=0 #Total number of membranes
 cellperimeter=np.linspace(0,0,Ncells)
@@ -359,7 +366,7 @@ for w in Cell2Wall_loop: #Loop on cells. Cell2Wall_loop contains cell wall group
     cellarea[cellnumber1] += (position_junctions[wid0][0+j]+position[wid0][0])*(position_junctions[wid0][1+j]-position[wid0][1]) #Back to the first node
     cellarea[cellnumber1] /= -2.0
 
-Cell_connec=-ones((Ncells,35),dtype=int) #Connected cells for further ranking
+Cell_connec=-ones((Ncells,25),dtype=int) #Connected cells for further ranking
 nCell_connec=zeros((Ncells,1),dtype=int) #Quantity of cell to cell connectionsC:\Users\heymansad
 for i in range(0, len(Walls_loop)): #Loop on walls, by cell - wall association, hence a wall can be repeated if associated to two cells. Parent structure: Cell/Walls/Wall
            	r1 = Walls_loop[i] #Points to the current wall
@@ -401,10 +408,29 @@ for w in Cell2Wall_loop: #Loop on cells. Cell2Wall_loop contains cell wall group
 x_grav/=n_cell_endo
 y_grav/=n_cell_endo
 
+#Calculation of a and b parameter for cortex AQP activity radial distribution
+#print('Identifying cell layers')
+#<group id="2" name="epidermis" />      is epidermis
+#<group id="1" name="general" />        is exodermis
+#<group id="4" name="cortex" />         is cortex
+#<group id="3" name="endodermis" />     is endodermis
+#<group id="16" name="pericycle" />     is pericycle
+#<group id="5" name="stele" />          is stelar parenchyma
+#<group id="11" name="columella1" />    is phloem sieve tube
+#<group id="13" name="columella3" />    is xylem
+#<group id="12" name="columella2" />    is companion cell
+#<group id="19" name="Protoxylem" />    is xylem
+#<group id="20" name="Metaxylem" />     is xylem
+#<group id="21" name="XylemPolePericyle" /> is pericycle
+#<group id="23" name="Phloem" />        is phloem
+#<group id="26" name="CompanionCell" /> is companion cell
+
 Cell_rank=zeros((Ncells,1)) #Ranking of cells (1=Exodermis, 2=Epidermis, 3=Endodermis, 4*=Cortex, 5*=Stele, 11=Phloem sieve tube, 12=Companion cell, 13=Xylem, 16=Pericycle), stars are replaced by the ranking within cortical cells and stele cells
 Layer_dist=zeros((62,1)) #Average cell layers distances from center of gravity, by cells ranking 
 nLayer=zeros((62,1)) #Total number of cells in each rank (indices follow ranking numbers)
 xyl_dist=[] #List of distances between xylem and cross-section centre
+#angle_dist_endo_grav=array([-4,0]) #array of distances and angles between endo cells and grav. Initializing the array with values that will eventualy be deleted
+#angle_dist_exo_grav=array([-4,0]) #array of distances and angles between exo cells and grav. Initializing the array with values that will eventualy be deleted
 for w in Cell2Wall_loop: #Loop on cells. Cell2Wall_loop contains cell wall groups info (one group by cell)
 	cellnumber1 = int(w.getparent().get("id")) #Cell ID number
 	celltype=G.node[NwallsJun + cellnumber1]['cgroup'] #Cell type
@@ -476,7 +502,11 @@ for w in Cell2Wall_loop: #Loop on cells. Cell2Wall_loop contains cell wall group
 Nsieve=len(listsieve)
 Nprotosieve=len(listprotosieve)
 
+#cortex_cellperimeters_in=rank_cellperimeters_in #Inner part of the cortex (close to endodermis)
+#cortex_cellperimeters_out=rank_cellperimeters_out #Outer part of cortex
 for i in range(12):
+    #rank_cellperimeters_in=linspace(nan,nan,100)
+    #rank_cellperimeters_out=linspace(nan,nan,100)
     for w in Cell2Wall_loop: #Loop on cells. Cell2Wall_loop contains cell wall groups info (one group by cell)
         cellnumber1 = int(w.getparent().get("id")) #Cell ID number
         celltype=Cell_rank[cellnumber1] #Cell types 4 and 5 updated to account for their ranking within the cortex / stele
@@ -524,7 +554,10 @@ for i in range(12):
                 dist=hypot(x_cell-x_grav,y_cell-y_grav) #(micrometers)
                 Layer_dist[61]+=dist
                 nLayer[61]+=1
-
+#    if i<4:
+        #cortex_cellperimeters_in=vstack((cortex_cellperimeters_in,rank_cellperimeters_in))
+        #cortex_cellperimeters_out=vstack((rank_cellperimeters_out,cortex_cellperimeters_out))
+#cortex_cellperimeters=vstack((cortex_cellperimeters_in,cortex_cellperimeters_out))
 InterCid=InterCid[1:]
 
 #Calculating cell surfaces at tissue interfaces (total and interfacing with a cell that is not an intercellular space)
@@ -862,6 +895,14 @@ else:
                 r_rel[wid]=min(max(rad_pos,0.00001),1)
         x_rel[wid]=(position[wid][0]-min_x_wall)/(max_x_wall-min_x_wall)
 
+#temp=0
+#for node, edges in G.adjacency_iter():
+#    for neighboor, eattr in edges.items(): #Loop on connections (edges) separated to make sure that Wall2Cell[i] is complete
+#        temp+=1
+    
+
+#At this point, nThickWallPolygonX equals 2 (two thick wall nodes for each wall node)
+#We still have to add two more thick junction nodes for each row in nThickWallPolygonX (each row is a "wall polygon")
 if Paraview==1 or ParTrack==1 or Apo_Contagion>0 or Sym_Contagion>0:
     for node, edges in G.adjacency_iter():
         i=indice[node]
@@ -983,9 +1024,12 @@ if Paraview==1 or ParTrack==1 or Apo_Contagion>0 or Sym_Contagion>0:
                     Apo_j_Zombies0.append(j)
                     Apo_j_cc.append(cc)
 
+#######################################
+##Variables for potential calculation##
+#######################################
 
 #Import Hydraulic data
-print('Importing hydraulic data')
+#print('Importing hydraulic data')
 kwrange=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('kwrange/kw')
 kw_barrier_range=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('kw_barrier_range/kw_barrier')
 kmb=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('km')[0].get("value"))
@@ -4430,4 +4474,19 @@ for h in range(Nhydraulics):
                     myfile.write("\n")
             myfile.close()
             text_file.close()
-
+        
+    
+    #text_file = open(newpath+"Cortical_cell_perimeters.txt", "w")
+    #with open(newpath+"Cortical_cell_perimeters.txt", "a") as myfile:
+    #    for j in range(10):
+    #        myfile.write(str(cortex_cellperimeters[j][:])+" \n")
+    #myfile.close()
+    #text_file.close()
+    
+    
+    #text_file = open(newpath+"PD_flow_rates.txt", "w")
+    #with open(newpath+"Cortical_cell_perimeters.txt", "a") as myfile:
+    #    for j in range(10):
+    #        myfile.write(str(cortex_cellperimeters[j][:])+" \n")
+    #myfile.close()
+    #text_file.close()
