@@ -70,7 +70,7 @@ system("C:/Users/heymansad/AppData/Local/Continuum/anaconda3/envs/MECHA/python.e
 ```
 
 
-```{r}
+```{r, warning=FALSE}
 
 Flux1 <- ApoSymp("MECHA/Projects/granar/out/Root/Project_Test/baseline/Macro_prop_1,0.txt")
 Flux2 <- ApoSymp("MECHA/Projects/granar/out/Root/Project_Test/baseline/Macro_prop_2,1.txt")

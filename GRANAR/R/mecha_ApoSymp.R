@@ -170,5 +170,5 @@ plot_water_flux <- function(Flux){
     xlim(-200, 70)+
     theme_classic()+
     ylab("Water flux in each component [cm3/d]")+
-    xlab("Distance from the endodermis layer [µm]")
+    xlab("Distance from the endodermis layer [um]")
 }
