@@ -26,7 +26,7 @@ source("./GRANAR/R/granar.R")
 
 Granar was built upon the following dependencies dependencies:
 
-```{r core, echo=T, warning=F, message=F}
+```{r core granar, warning=F, message=F}
 # Load one parameter file for GRANAR
 params <- read_param_xml("GRANAR/model_params/Zea_mays_1_Heymans_2019.xml")
 
@@ -47,6 +47,24 @@ sim <- create_anatomy(parameters = params, verbatim=T)
 # sim is a list
 # sim$nodes is a data frame with most of the information
 # sim$output is a data frame with summarize anatomical features
+
+```
+
+
+```{r hydro_prop}
+# hydraulic conductivity of standard walls
+kw = 2.4E-4 # [cm^2/hPa/d] Zhu and Steudle (1991)
+
+# Cell membrane permeability, with separate contribution of the biphospholipid layer (km) and AQP (kAQP)
+km = 3.0E-5 # [cm/hPa/d]  after removal of kAQP and kpl from Elhert et al. (2009) and Bret-Hart and Silk (1994)
+kAQP = 4.3E-4 # [cm/hPa/d] 
+
+# Individual plasmodesma conductance
+kpl = 5.3E-12 #  [cm^3/hPa/d/plasmodesmata] Geometrical average from Bret-Hart and Silk (1994)
+
+# change cell hydraulic properties
+microhydro(path = "MECHA/Projects/granar/in/Maize_Hydraulics.xml",
+           kw, km, kAQP, kpl)
 
 ```
 
