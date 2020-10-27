@@ -152,23 +152,48 @@ for(i in 2:nrow(cxyl)){
 return(Flux)
 }
 
-plot_water_flux <- function(Flux){
+plot_water_flux <- function(Flux, apobar = 1){
   Q_tot = Flux$Apo[2]
+  r_0 <- Flux$r_coord_layer[1]
   
-  Flux%>%
+  colo <- c("Apoplastic compartment" = "burlywood3", "Symplastic compartment"= "dodgerblue2")
+  
+  pl <- Flux%>%
     filter(!is.na(Sympl) )%>%
     ggplot()+
-    geom_polygon(aes(r_coord_layer, Apo), fill = "burlywood3", data = Flux%>%filter(!is.na(Apo) ))+
-    geom_polygon(aes(r_coord_layer, Sympl), fill = "dodgerblue2")+
-    
+    geom_polygon(aes(r_coord_layer, Apo, fill = "Apoplastic compartment"), data = Flux%>%filter(!is.na(Apo) ))+
+    geom_polygon(aes(r_coord_layer, Sympl, fill = "Symplastic compartment") )+
     geom_line(aes(r_coord_layer, Sympl))+
-    # geom_point(aes(r_coord_layer, Sympl))+
     geom_vline(aes(xintercept = r_coord_layer), alpha = 0.2, linetype = 2, data = Flux%>%filter(label == "mid_wall"))+
     geom_vline(aes(xintercept = r_coord_layer), alpha = 0.5, linetype = 2, data = Flux%>%filter(type == "soil"))+
     geom_hline(yintercept = Q_tot)+
     geom_hline(yintercept = 0)+
-    xlim(-200, 70)+
+    xlim(r_0-2, 70)+
     theme_classic()+
-    ylab("Water flux in each component [cm3/d]")+
-    xlab("Distance from the endodermis layer [um]")
+    ylab("Partition of radial water flow rates \n between compartments [cm3/d]")+
+    xlab("Distance from the endodermis layer [um]")+
+    labs(fill = "Compartment")+
+    scale_fill_manual(values = colo)
+  
+  if(apobar == 1){
+    pl <- pl + geom_vline(aes(xintercept = 0), alpha = 0.6, size = 2, color = "red")
+  }
+  if(apobar == 2){
+    pl <- pl + geom_vline(aes(xintercept = 0), alpha = 0.6, size = 2, color = "red")+
+      geom_vline(aes(xintercept = r_coord_layer), alpha = 0.6, size = 2, color = "red",
+                 data = Flux%>%filter(id %in% c(48,57)))
+  }
+  if(apobar == 3){
+    pl <- pl + geom_vline(aes(xintercept = 0), alpha = 0.6, size = 2, color = "red")+
+      geom_vline(aes(xintercept = r_coord_layer), alpha = 0.6, size = 2, color = "red",
+                 data = Flux%>%filter(id %in% c(48,57)))+
+      geom_vline(aes(xintercept = r_coord_layer), alpha = 0.6, size = 2, color = "red",
+                 data = Flux%>%filter(label == "mid_cell",
+                                      type == "exodermis"))
+      
+  }
+  
+  
+  print(pl)
 }
+

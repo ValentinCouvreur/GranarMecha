@@ -102,9 +102,9 @@ Flux2 <- ApoSymp("MECHA/Projects/granar/out/Root/Project_Test/baseline/Macro_pro
 Flux3 <- ApoSymp("MECHA/Projects/granar/out/Root/Project_Test/baseline/Macro_prop_4,2.txt")
 
 # Plot Apoplastic and Symplastic fluxes
-plot_water_flux(Flux1)
-plot_water_flux(Flux2)
-plot_water_flux(Flux3)
+plot_water_flux(Flux1, apobar = 1)
+plot_water_flux(Flux2, apobar = 2)
+plot_water_flux(Flux3, apobar = 3)
 
 ```
 
