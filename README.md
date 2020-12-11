@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4316762.svg)](https://doi.org/10.5281/zenodo.4316762)
 # GranarMecha
 
 To run GRANAR and MECHA as one in the cloud, go to: https://mybinder.org/v2/gh/HeymansAdrien/GranarMecha/main
