@@ -17,11 +17,13 @@
 
 
 	<!-- Vessels-->
-	<xylem max_size="0.0337" n_files="4" order="1.5" ratio ="4.75" />
+	<xylem max_size="0.025" n_files="4" order="1.5" ratio ="2.9" />
 	<phloem max_size="0.01" n_files="3" />
 	
 	<!-- Other cell types -->
 	<!--aerenchyma proportion="0" n_files="10"/-->
 	<aerenchyma proportion="0.53" n_files="17"/>
+	<inter_cellular_space ratio="0.3" size="0.005"/>
+	<hair n_files = "10" length="0.03"/>
 
 </granar>

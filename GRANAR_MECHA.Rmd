@@ -9,7 +9,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "./")
+knitr::opts_knit$set(root.dir = "~/GitHub/GranarMecha/")
 ```
 
 ```{r lib}
@@ -28,19 +28,20 @@ Granar was built upon the following dependencies dependencies:
 
 ```{r core granar, warning=F, message=F}
 # Load one parameter file for GRANAR
-params <- read_param_xml("GRANAR/model_params/Zea_mays_1_Heymans_2019.xml")
+# params <- read_param_xml("GRANAR/model_params/Zea_mays_1_Heymans_2019.xml")
+params <- read_param_xml("GRANAR/model_params/Italo_WW_vine_10114_C_ID2.xml")
 
  # # # # # # # # # # # # # # #
 #  To change paramter value   #
  # # # # # # # # # # # # # # #
     
 # Xylem size (diameter)
-params$value[params$type == "max_size" & params$name == "xylem"] <- 0.043
+# params$value[params$type == "max_size" & params$name == "xylem"] <- 0.043
 
 # aerenchyma proportion
-params$value[params$type == "proportion" & params$name == "aerenchyma"] <- 0.2
+params$value[params$type == "proportion" & params$name == "aerenchyma"] <- 0.25
 # number of lacuna
-params$value[params$type == "n_files" & params$name == "aerenchyma"] <- 15
+params$value[params$type == "n_files" & params$name == "aerenchyma"] <- 25
 
 # Generate the anatomy
 sim <- create_anatomy(parameters = params, verbatim=T)

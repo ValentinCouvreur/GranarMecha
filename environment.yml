@@ -6,6 +6,7 @@ dependencies:
   - scipy
   - matplotlib
   - lxml
+  - ipywidgets
   - pip
   - pip:
     - networkx==1.9.1
