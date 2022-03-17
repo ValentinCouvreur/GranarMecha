@@ -1,4 +1,12 @@
 
+
+require(tidyverse)
+require(plyr)
+require(deldir)
+require(sp)
+require(xml2)
+require(viridis)
+
 source("./GRANAR/R/aer_in_geom_xml.R")
 source("./GRANAR/R/io_function.R")
 source("./GRANAR/R/create_anatomy.R")

@@ -122,7 +122,7 @@ create_anatomy <- function(path = NULL,  # path to xml file
   # hairy epidermis # add-on 27-02-2020
   #-----------------------------------------
   
-  if(length(params$value[params$name == "hair"] )!= 0){
+  if(length(params$value[params$name == "hair"] ) != 0){
     if(params$value[params$name == "hair" & params$type == "n_files"] > 0 ){
       rs1 <- root_hair(rs1, params, center)
     }

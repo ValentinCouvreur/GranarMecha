@@ -7,18 +7,17 @@
 	<randomness param="1" />
 	
 	<!-- Cell layers -->
-	<stele cell_diameter="0.009" n_layers="1" layer_diameter = "0.282" order="1"/>
+	<stele cell_diameter="0.009" n_layers="1" layer_diameter = "0.140" order="1"/>
 	<pericycle cell_diameter="0.007" n_layers="1"  order="2"/>
-	<endodermis cell_diameter="0.009" n_layers="1"  order="3"/>
+	<endodermis cell_diameter="0.007" n_layers="1"  order="3"/>
 	<cortex_inner cell_diameter="0.015" n_layers="1"  order="4"/>
-	<cortex cell_diameter="0.03" n_layers="3"  order="4"/>
-	<cortex_outer cell_diameter="0.02" n_layers="3"  order="5"/>
-	<exodermis cell_diameter="0.0157" n_layers="1" order="5"/>	
-	<epidermis cell_diameter="0.011" n_layers="1" order="6"/>
+	<cortex cell_diameter="0.0154" n_layers="4"  order="4"/>
+	<exodermis cell_diameter="0.013" n_layers="1" order="5"/>	
+	<epidermis cell_diameter="0.006" n_layers="1" order="6"/>
 
 
 	<!-- Vessels-->
-	<xylem max_size="0.043" n_files="9" order="1.5" ratio ="1.21" />
+	<xylem max_size="0.025" n_files="5" order="1.5" ratio ="1.21" />
 	<phloem max_size="0.01" n_files="3" />
 	
 	<!-- Other cell types -->

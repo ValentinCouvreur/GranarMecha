@@ -17,7 +17,7 @@
 
 
 	<!-- Vessels-->
-	<xylem max_size="0.01" n_files="1" order="1.5" ratio ="1" />
+	<xylem max_size="0.008" n_files="1" order="1.5" ratio ="1" />
 	<phloem max_size="0.01" n_files="3" />
 	
 	<!-- Other cell types -->

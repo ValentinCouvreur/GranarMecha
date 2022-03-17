@@ -113,7 +113,7 @@ create_cells <- function(all_layers, random_fact){
 }
 
 make_pith <- function(all_cells, params, center){
-  if(params$value[params$name == "pith"][1] > 0){
+  if(!is.na(params$value[params$name == "pith"][1])){
     pith_size <- params$value[params$name == "pith" & params$type == "layer_diameter"]/2
     pcell <- params$value[params$name == "pith" & params$type == "cell_diameter"]
   }else{pith_size <- 0}
