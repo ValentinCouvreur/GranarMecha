@@ -168,7 +168,7 @@ plot_water_flux <- function(Flux, apobar = 1){
     geom_vline(aes(xintercept = r_coord_layer), alpha = 0.5, linetype = 2, data = Flux%>%filter(type == "soil"))+
     geom_hline(yintercept = Q_tot)+
     geom_hline(yintercept = 0)+
-    xlim(r_0-2, 90)+
+    xlim(r_0-2, 250)+
     theme_classic()+
     ylab("Partition of radial water flow rates \n between compartments [cm3/d]")+
     xlab("Distance from the endodermis layer [um]")+
