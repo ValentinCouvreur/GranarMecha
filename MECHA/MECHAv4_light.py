@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #Directory
-dir='./MECHA/'
+directory='../MECHA/'
 
 #Project
 Project='Projects/granar/'#BBSRC/'#'Projects/
@@ -28,29 +28,29 @@ import sys, os # On importe le module os qui dispose de variables
                # système d'exploitation
 
 print('Importing geometrical data')
-OS=etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('OS')[0].get("value")
-Output_path=etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Output')[0].get("path")
-Paraview=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("value"))
-ParaviewWF=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("WallFlux"))
-ParaviewMF=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("MembraneFlux"))
-ParaviewPF=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("PlasmodesmataFlux"))
-ParaviewWP=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("WallPot"))
-ParaviewCP=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("CellPot"))
-ParTrack=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('ParTrack')[0].get("value"))
-Sym_Contagion=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Sym_Contagion')[0].get("value"))
-Apo_Contagion=int(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('Apo_Contagion')[0].get("value"))
-color_threshold=float(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('color_threshold')[0].get("value"))
-thickness_disp=float(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('thickness_disp')[0].get("value"))
-thicknessJunction_disp=float(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('thicknessJunction_disp')[0].get("value"))
-radiusPlasmodesm_disp=float(etree.parse(dir + Project + 'in/' + Gen).getroot().xpath('radiusPlasmodesm_disp')[0].get("value"))
+OS=etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('OS')[0].get("value")
+Output_path=etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Output')[0].get("path")
+Paraview=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("value"))
+ParaviewWF=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("WallFlux"))
+ParaviewMF=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("MembraneFlux"))
+ParaviewPF=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("PlasmodesmataFlux"))
+ParaviewWP=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("WallPot"))
+ParaviewCP=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Paraview')[0].get("CellPot"))
+ParTrack=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('ParTrack')[0].get("value"))
+Sym_Contagion=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Sym_Contagion')[0].get("value"))
+Apo_Contagion=int(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('Apo_Contagion')[0].get("value"))
+color_threshold=float(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('color_threshold')[0].get("value"))
+thickness_disp=float(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('thickness_disp')[0].get("value"))
+thicknessJunction_disp=float(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('thicknessJunction_disp')[0].get("value"))
+radiusPlasmodesm_disp=float(etree.parse(directory + Project + 'in/' + Gen).getroot().xpath('radiusPlasmodesm_disp')[0].get("value"))
 
 print('Import Geometrical data')
-Plant=etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('Plant')[0].get("value")
-path=etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('path')[0].get("value")
-im_scale=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('im_scale')[0].get("value"))
-Maturityrange=etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('Maturityrange/Maturity')
-passage_cell_range=etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('passage_cell_range/passage_cell')
-aerenchyma_range=etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('aerenchyma_range/aerenchyma')
+Plant=etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('Plant')[0].get("value")
+path=etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('path')[0].get("value")
+im_scale=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('im_scale')[0].get("value"))
+Maturityrange=etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('Maturityrange/Maturity')
+passage_cell_range=etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('passage_cell_range/passage_cell')
+aerenchyma_range=etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('aerenchyma_range/aerenchyma')
 passage_cell_ID=[]
 for passage_cell in passage_cell_range:
     passage_cell_ID.append(int(passage_cell.get("id")))
@@ -58,67 +58,67 @@ PPP=list()
 InterCid=list() #Aerenchyma is classified as intercellular space
 for aerenchyma in aerenchyma_range:
     InterCid.append(int(aerenchyma.get("id"))) #Cell id starting at 0
-InterC_perim1=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('InterC_perim1')[0].get("value"))
-InterC_perim2=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('InterC_perim2')[0].get("value"))
-InterC_perim3=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('InterC_perim3')[0].get("value"))
-InterC_perim4=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('InterC_perim4')[0].get("value"))
-InterC_perim5=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('InterC_perim5')[0].get("value"))
-kInterC=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('kInterC')[0].get("value"))
+InterC_perim1=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('InterC_perim1')[0].get("value"))
+InterC_perim2=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('InterC_perim2')[0].get("value"))
+InterC_perim3=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('InterC_perim3')[0].get("value"))
+InterC_perim4=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('InterC_perim4')[0].get("value"))
+InterC_perim5=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('InterC_perim5')[0].get("value"))
+kInterC=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('kInterC')[0].get("value"))
 cell_per_layer=zeros((2,1))
-cell_per_layer[0][0]=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('cell_per_layer')[0].get("cortex"))
-cell_per_layer[1][0]=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('cell_per_layer')[0].get("stele"))
+cell_per_layer[0][0]=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('cell_per_layer')[0].get("cortex"))
+cell_per_layer[1][0]=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('cell_per_layer')[0].get("stele"))
 diffusion_length=zeros((2,1))
-diffusion_length[0][0]=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('diffusion_length')[0].get("cortex"))
-diffusion_length[1][0]=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('diffusion_length')[0].get("stele"))
-thickness=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('thickness')[0].get("value")) #micron
-PD_section=float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('PD_section')[0].get("value")) #micron^2
+diffusion_length[0][0]=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('diffusion_length')[0].get("cortex"))
+diffusion_length[1][0]=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('diffusion_length')[0].get("stele"))
+thickness=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('thickness')[0].get("value")) #micron
+PD_section=float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('PD_section')[0].get("value")) #micron^2
 Xylem_pieces=False
-if float(etree.parse(dir + Project + 'in/' + Geom).getroot().xpath('Xylem_pieces')[0].get("flag"))==1:
+if float(etree.parse(directory + Project + 'in/' + Geom).getroot().xpath('Xylem_pieces')[0].get("flag"))==1:
     Xylem_pieces=True
 
 #Import hormone properties
-Degrad1=float(etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/Degradation_constant_H1')[0].get("value")) #Hormone 1 degradation constant (mol degraded / mol-day)
-Diff_PD1=float(etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/Diffusivity_PD_H1')[0].get("value")) #Hormone 1 diffusivity constant (cm^2/day)
-Diff_PW1=float(etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/Diffusivity_PW_H1')[0].get("value")) #Hormone 1 diffusivity constant (cm^2/day)
-D2O1=int(etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/H1_D2O')[0].get("flag")) #Hormone 1 diffusivity constant (cm^2/day)
-Active_transport_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Hormone_active_transport/carrier_range/carrier')
-Sym_source_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Sym_Contagion/source_range/source')
+Degrad1=float(etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/Degradation_constant_H1')[0].get("value")) #Hormone 1 degradation constant (mol degraded / mol-day)
+Diff_PD1=float(etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/Diffusivity_PD_H1')[0].get("value")) #Hormone 1 diffusivity constant (cm^2/day)
+Diff_PW1=float(etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/Diffusivity_PW_H1')[0].get("value")) #Hormone 1 diffusivity constant (cm^2/day)
+D2O1=int(etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Hormone_movement/H1_D2O')[0].get("flag")) #Hormone 1 diffusivity constant (cm^2/day)
+Active_transport_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Hormone_active_transport/carrier_range/carrier')
+Sym_source_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Sym_Contagion/source_range/source')
 Sym_Zombie0=[]
 for source in Sym_source_range:
     Sym_Zombie0.append(int(source.get("id")))
 Sym_cc=[]
 for source in Sym_source_range:
     Sym_cc.append(float(source.get("concentration")))
-Sym_target_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Sym_Contagion/target_range/target')
+Sym_target_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Sym_Contagion/target_range/target')
 Sym_Target=[]
 for target in Sym_target_range:
     Sym_Target.append(int(target.get("id")))
-Sym_immune_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Sym_Contagion/immune_range/immune')
+Sym_immune_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Sym_Contagion/immune_range/immune')
 Sym_Immune=[]
 for immune in Sym_immune_range:
     Sym_Immune.append(int(immune.get("id")))
-Apo_source_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Apo_Contagion/source_range/source')
+Apo_source_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Apo_Contagion/source_range/source')
 Apo_Zombie0=[]
 for source in Apo_source_range:
     Apo_Zombie0.append(int(source.get("id")))
 Apo_cc=[]
 for source in Apo_source_range:
     Apo_cc.append(float(source.get("concentration")))
-Apo_target_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Apo_Contagion/target_range/target')
+Apo_target_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Apo_Contagion/target_range/target')
 Apo_Target=[]
 for target in Apo_target_range:
     Apo_Target.append(int(target.get("id")))
-Apo_immune_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Apo_Contagion/immune_range/immune')
+Apo_immune_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Apo_Contagion/immune_range/immune')
 Apo_Immune=[]
 for immune in Apo_immune_range:
     Apo_Immune.append(int(immune.get("id")))
-contact_range=etree.parse(dir + Project + 'in/' + Horm).getroot().xpath('Contactrange/Contact')
+contact_range=etree.parse(directory + Project + 'in/' + Horm).getroot().xpath('Contactrange/Contact')
 Contact=[]
 for contact in contact_range:
     Contact.append(int(contact.get("id")))
 
 #Import cellset data
-tree = etree.parse(dir + 'cellsetdata/' + path) #Maize_Charles\\Maize_pip_cross4.xml') # #Parse literally decrypts the tree element data         SteleOK_high.xml
+tree = etree.parse(directory + 'cellsetdata/' + path) #Maize_Charles\\Maize_pip_cross4.xml') # #Parse literally decrypts the tree element data         SteleOK_high.xml
 rootelt = tree.getroot()
 Cell2Wall_loop = rootelt.xpath('cells/cell/walls') #Cell2Wall_loop contains cell wall groups info (one group by cell), searched by xpath ("Smart" element identifier)
 
@@ -126,7 +126,7 @@ Cell2Wall_loop = rootelt.xpath('cells/cell/walls') #Cell2Wall_loop contains cell
 points = rootelt.xpath('walls/wall/points') #points contains the wall elements attributes
 Walls_loop = rootelt.xpath('cells/cell/walls/wall') #Walls_loop contains the individual cell to wall associations
 Cells_loop=rootelt.xpath('cells/cell') #Cells_loop contains the cell attributes
-newpath=dir+Project+Output_path+Plant+'/'
+newpath=directory+Project+Output_path+Plant+'/'
 #print('Outputs in '+newpath)
 if not os.path.exists(newpath):
     os.makedirs(newpath)
@@ -986,44 +986,44 @@ if Paraview==1 or ParTrack==1 or Apo_Contagion>0 or Sym_Contagion>0:
 
 #Import Hydraulic data
 print('Importing hydraulic data')
-kwrange=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('kwrange/kw')
-kw_barrier_range=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('kw_barrier_range/kw_barrier')
-kmb=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('km')[0].get("value"))
-kAQPrange=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('kAQPrange/kAQP')
+kwrange=etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('kwrange/kw')
+kw_barrier_range=etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('kw_barrier_range/kw_barrier')
+kmb=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('km')[0].get("value"))
+kAQPrange=etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('kAQPrange/kAQP')
 
-ratio_cortex=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('ratio_cortex')[0].get("value"))
-Kplrange=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Kplrange/Kpl')
-Fplxheight=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight')[0].get("value")) #Product of plasmodesmatal frequency (per square cm) by cell axial length when the frequency was counted (cm) => units: per cm of cell membrane perimeter, to be multiplied by cell perimeter in cm to obtain a quantity of plasmodesmata
-Fplxheight_epi_exo=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_epi_exo')[0].get("value")) #Because they are "cell axial length independent", these values conserve the quantity of plasmodesmata when cells elongate
-Fplxheight_outer_cortex=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_outer_cortex')[0].get("value"))
-Fplxheight_cortex_cortex=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_cortex_cortex')[0].get("value"))
-Fplxheight_cortex_endo=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_cortex_endo')[0].get("value"))
-Fplxheight_endo_endo=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_endo_endo')[0].get("value"))
-Fplxheight_endo_peri=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_endo_peri')[0].get("value"))
-Fplxheight_peri_peri=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_peri')[0].get("value"))
-Fplxheight_peri_stele=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_stele')[0].get("value"))
-Fplxheight_stele_stele=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_stele_stele')[0].get("value"))
-Fplxheight_stele_comp=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_stele_comp')[0].get("value"))
-Fplxheight_peri_comp=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_comp')[0].get("value"))
-Fplxheight_comp_comp=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_comp_comp')[0].get("value"))
-Fplxheight_comp_sieve=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_comp_sieve')[0].get("value"))
-Fplxheight_peri_sieve=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_sieve')[0].get("value"))
-Fplxheight_stele_sieve=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_stele_sieve')[0].get("value"))
-K_sieve=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('K_sieve')[0].get("value")) #Sieve tube hydraulic conductance
-K_xyl=float(etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('K_xyl')[0].get("value")) #Xylem vessel axial hydraulic conductance
-Xcontactrange=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('Xcontactrange/Xcontact')
-path_hydraulics=etree.parse(dir + Project + 'in/' + Hydr).getroot().xpath('path_hydraulics/Output')
+ratio_cortex=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('ratio_cortex')[0].get("value"))
+Kplrange=etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Kplrange/Kpl')
+Fplxheight=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight')[0].get("value")) #Product of plasmodesmatal frequency (per square cm) by cell axial length when the frequency was counted (cm) => units: per cm of cell membrane perimeter, to be multiplied by cell perimeter in cm to obtain a quantity of plasmodesmata
+Fplxheight_epi_exo=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_epi_exo')[0].get("value")) #Because they are "cell axial length independent", these values conserve the quantity of plasmodesmata when cells elongate
+Fplxheight_outer_cortex=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_outer_cortex')[0].get("value"))
+Fplxheight_cortex_cortex=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_cortex_cortex')[0].get("value"))
+Fplxheight_cortex_endo=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_cortex_endo')[0].get("value"))
+Fplxheight_endo_endo=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_endo_endo')[0].get("value"))
+Fplxheight_endo_peri=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_endo_peri')[0].get("value"))
+Fplxheight_peri_peri=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_peri')[0].get("value"))
+Fplxheight_peri_stele=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_stele')[0].get("value"))
+Fplxheight_stele_stele=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_stele_stele')[0].get("value"))
+Fplxheight_stele_comp=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_stele_comp')[0].get("value"))
+Fplxheight_peri_comp=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_comp')[0].get("value"))
+Fplxheight_comp_comp=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_comp_comp')[0].get("value"))
+Fplxheight_comp_sieve=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_comp_sieve')[0].get("value"))
+Fplxheight_peri_sieve=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_peri_sieve')[0].get("value"))
+Fplxheight_stele_sieve=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Fplxheight_stele_sieve')[0].get("value"))
+K_sieve=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('K_sieve')[0].get("value")) #Sieve tube hydraulic conductance
+K_xyl=float(etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('K_xyl')[0].get("value")) #Xylem vessel axial hydraulic conductance
+Xcontactrange=etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('Xcontactrange/Xcontact')
+path_hydraulics=etree.parse(directory + Project + 'in/' + Hydr).getroot().xpath('path_hydraulics/Output')
 
 #Import boundary conditions
-Psi_soil_range=etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Psi_soil_range/Psi_soil')
-BC_xyl_range=etree.parse(dir + Project + 'in/' + BC).getroot().xpath('BC_xyl_range/BC_xyl')
-BC_sieve_range=etree.parse(dir + Project + 'in/' + BC).getroot().xpath('BC_sieve_range/BC_sieve')
-Psi_cell_range=etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Psi_cell_range/Psi_cell')
-Elong_cell_range=etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Elong_cell_range/Elong_cell')
-#Elong_cell_kappa=float(etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Elong_cell')[0].get("kappa_dot")) #Rate change of curvature (radian/micron/d)
-Water_fraction_apo=float(etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Water_fractions')[0].get("Apoplast")) #Relative volumetric fraction of water in the apoplast (dimensionless)
-Water_fraction_sym=float(etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Water_fractions')[0].get("Symplast")) #Relative volumetric fraction of water in the symplast (dimensionless)
-path_BC=etree.parse(dir + Project + 'in/' + BC).getroot().xpath('path_scenarios/Output')[0].get("path")
+Psi_soil_range=etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Psi_soil_range/Psi_soil')
+BC_xyl_range=etree.parse(directory + Project + 'in/' + BC).getroot().xpath('BC_xyl_range/BC_xyl')
+BC_sieve_range=etree.parse(directory + Project + 'in/' + BC).getroot().xpath('BC_sieve_range/BC_sieve')
+Psi_cell_range=etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Psi_cell_range/Psi_cell')
+Elong_cell_range=etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Elong_cell_range/Elong_cell')
+#Elong_cell_kappa=float(etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Elong_cell')[0].get("kappa_dot")) #Rate change of curvature (radian/micron/d)
+Water_fraction_apo=float(etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Water_fractions')[0].get("Apoplast")) #Relative volumetric fraction of water in the apoplast (dimensionless)
+Water_fraction_sym=float(etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Water_fractions')[0].get("Symplast")) #Relative volumetric fraction of water in the symplast (dimensionless)
+path_BC=etree.parse(directory + Project + 'in/' + BC).getroot().xpath('path_scenarios/Output')[0].get("path")
 Nhydraulics=len(path_hydraulics) #Total number of hydraulic parameters sets
 Nkw=len(kwrange)
 NKpl=len(Kplrange)
@@ -1043,14 +1043,14 @@ for count in range(1,Nscenarios):
     Os_soil[1][count]=float(Psi_soil_range[count].get("osmotic_right"))
     Os_soil[2][count]=float(Psi_soil_range[count].get("osmotic_symmetry"))
     Os_soil[3][count]=float(Psi_soil_range[count].get("osmotic_shape")) #1 for linear, >1 for outer slope flat, <1 for inner slope flat
-    Os_soil[4][count]=float(etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Psi_soil_range/osmotic_diffusivity')[0].get("value"))
-    #Os_soil[5][count]=float(etree.parse(dir + Project + 'in/' + BC).getroot().xpath('Psi_soil_range/osmotic_convection')[0].get("flag"))
+    Os_soil[4][count]=float(etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Psi_soil_range/osmotic_diffusivity')[0].get("value"))
+    #Os_soil[5][count]=float(etree.parse(directory + Project + 'in/' + BC).getroot().xpath('Psi_soil_range/osmotic_convection')[0].get("flag"))
     Os_xyl[0][count]=float(BC_xyl_range[count].get("osmotic_xyl"))
     Os_xyl[1][count]=float(BC_xyl_range[count].get("osmotic_endo"))
     Os_xyl[2][count]=float(BC_xyl_range[count].get("osmotic_symmetry"))
     Os_xyl[3][count]=float(BC_xyl_range[count].get("osmotic_shape")) #The symmetry is central. 1 for linear, >1 for outer slope flat, <1 for inner slope flat
-    Os_xyl[4][count]=float(etree.parse(dir + Project + 'in/' + BC).getroot().xpath('BC_xyl_range/osmotic_diffusivity')[0].get("value"))
-    #Os_xyl[5][count]=float(etree.parse(dir + Project + 'in/' + BC).getroot().xpath('BC_xyl_range/osmotic_convection')[0].get("flag"))
+    Os_xyl[4][count]=float(etree.parse(directory + Project + 'in/' + BC).getroot().xpath('BC_xyl_range/osmotic_diffusivity')[0].get("value"))
+    #Os_xyl[5][count]=float(etree.parse(directory + Project + 'in/' + BC).getroot().xpath('BC_xyl_range/osmotic_convection')[0].get("flag"))
     if not Os_xyl[4][count]==0 and not Os_soil[4][count]==0:
         C_flag=True
         print('Calculation of analytical solution for radial solute transport in cell walls')
@@ -1063,7 +1063,7 @@ cmperm=100.0 #(cm per metre)
 for h in range(Nhydraulics):
     #print('   ')
     #print('Hydraulic network #'+str(h))
-    newpath=dir+Project+Output_path+Plant+'/'+path_BC+path_hydraulics[h].get("path")
+    newpath=directory+Project+Output_path+Plant+'/'+path_BC+path_hydraulics[h].get("path")
     if not os.path.exists(newpath):
         os.makedirs(newpath)
     
@@ -4311,7 +4311,10 @@ for h in range(Nhydraulics):
                 myfile.write("\n")
                 myfile.write("Wall layers pressure potentials: \n")
                 for j in range(int(r_discret[0])):
-                    myfile.write(str(PsiWallLayer[j][iMaturity][i]/NWallLayer[j][iMaturity][i])+" \n")
+                    if NWallLayer[j][iMaturity][i]>0:
+                        myfile.write(str(PsiWallLayer[j][iMaturity][i]/NWallLayer[j][iMaturity][i])+" \n")
+                    else:
+                        myfile.write("nan \n")
                 myfile.write("\n")
                 myfile.write("Wall layers osmotic potentials: \n")
                 for j in range(int(r_discret[0])):
