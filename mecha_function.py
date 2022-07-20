@@ -22,7 +22,7 @@ def mecha():
 # -*- coding: utf-8 -*-
 
     #Directory
-    dir='./MECHA/'
+    directory='./MECHA/'
 
     #Project
     Project='Projects/granar/'#BBSRC/'#'Projects/
